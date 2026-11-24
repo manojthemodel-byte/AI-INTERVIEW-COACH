@@ -1,0 +1,24 @@
+[
+  {
+    "id": "TC-01",
+    "name": "Off-topic Hash-Map Answer to Distributed Rate-Limiter",
+    "role": "Software Engineer",
+    "difficulty": "Hard",
+    "interview_type": "Technical",
+    "question": "Design a distributed rate limiter that can handle 100,000 requests per second across multiple regions. How would you handle race conditions and synchronization?",
+    "candidate_answer": "A hash map is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash map uses a hash function to compute an index, also called a hash code, into an array of buckets or slots, from which the desired value can be found. Collisions can be solved by chaining using linked lists or open addressing.",
+    "observed_application_score": 1.0,
+    "expected_behavior": "Strictly flagged as off-topic; score <= 2.0; relevance feedback clearly notes topic mismatch; points out that hash map definition does not address distributed rate limiting."
+  },
+  {
+    "id": "TC-02",
+    "name": "Relevant Token Bucket and Redis Answer to Distributed Rate-Limiter",
+    "role": "Software Engineer",
+    "difficulty": "Hard",
+    "interview_type": "Technical",
+    "question": "Design a distributed rate limiter that can handle 100,000 requests per second across multiple regions. How would you handle race conditions and synchronization?",
+    "candidate_answer": "To design a distributed rate limiter for 100k RPS, I would use the Token Bucket algorithm backed by Redis as a centralized in-memory datastore. We maintain rate limits per user or API key, storing the current token count and timestamp of the last request. To prevent race conditions and concurrency conflicts, we use atomic operations in Redis so token inspection and decrement occur safely. If a client exceeds their limit, the service rejects the request with an HTTP 429 Too Many Requests response code.",
+    "observed_application_score": 8.5,
+    "expected_behavior": "Scored in the strong bracket (7.5 - 8.9); praised for Token Bucket algorithm, Redis in-memory storage, atomic operations, per-user/API-key limits, and HTTP 429 status code; identified missing cross-region synchronization strategies and specific implementation details as areas to reach a 9+ score."
+  }
+]

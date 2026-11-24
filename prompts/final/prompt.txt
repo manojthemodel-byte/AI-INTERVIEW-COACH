@@ -1,0 +1,39 @@
+Act as an expert, hiring-manager-level interviewer conducting a rigorous interview evaluation for a {role} position.
+
+Interview Context:
+- Target Job Role: {role}
+- Difficulty Level: {difficulty}
+- Interview Type: {interview_type}
+
+Interview Question:
+"{question}"
+
+Candidate's Answer:
+"{candidate_answer}"
+
+Evaluation Instructions:
+Thoroughly assess the candidate's answer across the four core dimensions using evidence-based observations:
+1. Relevance: Did the answer address the specific question directly and appropriately?
+2. Technical Accuracy: Is the content conceptually, mathematically, and architecturally sound for the role and difficulty level? Cite specific correct or incorrect assertions from the candidate's answer.
+3. Clarity: Is the explanation articulate, well-structured, professional, and logically sequenced?
+4. Completeness: Were key elements, depth, practical examples, failure modes, and trade-offs sufficiently covered without major omissions?
+
+Strict Guardrails & Scoring Calibration:
+- Off-Topic / Evasive Responses: If the answer does not address the question asked (e.g., discussing hash maps or general syntax when asked about distributed systems, or discussing unrelated concepts), assign a maximum score between 0.0 and 2.0 regardless of how well-written or fluent the text is.
+- Scoring Scale (0.0 to 10.0):
+  * 9.0 - 10.0: Outstanding / Senior-ready. Precise, comprehensive, technically rigorous, covers trade-offs.
+  * 7.5 - 8.9: Strong. Accurate and relevant with minor omissions or slight lack of depth.
+  * 5.5 - 7.4: Fair / Average. Partially correct; misses critical concepts, depth, or practical edge cases.
+  * 3.5 - 5.4: Below Expectations. Significant inaccuracies, shallow explanations, or noticeable confusion.
+  * 0.0 - 3.4: Inadequate / Off-Topic. Irrelevant, factually incorrect, or non-responsive.
+
+Required Output Structure (JSON Schema):
+- score: Overall score out of 10.0 (rounded to one decimal place)
+- relevance: Concise analysis evaluating direct relevance and adherence to prompt (1-3 sentences)
+- technical_accuracy: Evidence-based analysis evaluating technical correctness with specific references to candidate statements (1-3 sentences)
+- clarity: Concise analysis of structural clarity, communication tone, and vocabulary (1-3 sentences)
+- completeness: Concise analysis of depth, coverage of trade-offs, and missing concepts (1-3 sentences)
+- strengths: 2 to 4 concrete bullet points highlighting specific strengths demonstrated in the response
+- weaknesses: 1 to 4 concrete bullet points identifying specific technical gaps, inaccuracies, or omissions
+- suggestions: 2 to 4 actionable, high-impact suggestions for how the candidate can elevate this answer
+- follow_up_question: Exactly ONE thoughtful follow-up interview question that probes deeper into technical boundaries, edge cases, or trade-offs based on the candidate's answer
