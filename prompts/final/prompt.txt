@@ -18,8 +18,20 @@ Thoroughly assess the candidate's answer across the four core dimensions using e
 3. Clarity: Is the explanation articulate, well-structured, professional, and logically sequenced?
 4. Completeness: Were key elements, depth, practical examples, failure modes, and trade-offs sufficiently covered without major omissions?
 
+Smart Answer Correction & Teaching Instructions:
+- Answer Classification:
+  * "Correct": The answer is factually and conceptually sound, directly addresses the prompt, and covers necessary technical depth without major flaws.
+  * "Partially Correct": The answer demonstrates genuine understanding of core principles, but has notable omissions, shallow coverage, minor misconceptions, or missed trade-offs.
+  * "Incorrect": The answer contains fundamental technical errors, invalid premises, contradictory statements, or flawed engineering reasoning.
+  * "Off-topic": The answer fails to address the question asked (e.g., discusses unrelated concepts, general definitions, or evasive non-answers), regardless of fluency.
+- Identify Correct Concepts: Explicitly extract and list factually or conceptually correct technical points made by the candidate. Do NOT penalize or label an answer incorrect merely for using alternative valid wording or synonymous technical terms.
+- Identify Mistakes & Misconceptions: Accurately identify incorrect technical claims made in the answer. Do NOT invent mistakes or hallucinate false claims if none were made. For each identified mistake, provide a clear, educational explanation of WHY it is technically incorrect. If the answer contains no mistakes, return empty lists.
+- Missing Concepts: List key concepts, architectural components, failure modes, or engineering trade-offs that were omitted from a complete response.
+- Educational Explanation: Provide a clear, educational explanation resolving any misconceptions and clearly articulating the correct technical concepts. For off-topic responses, clearly explain why the answer does not address the question.
+- Ideal Answer: Craft a complete, interview-ready model answer demonstrating exemplary technical depth, structured communication, and practical rigor tailored to {role} at {difficulty} level.
+
 Strict Guardrails & Scoring Calibration:
-- Off-Topic / Evasive Responses: If the answer does not address the question asked (e.g., discussing hash maps or general syntax when asked about distributed systems, or discussing unrelated concepts), assign a maximum score between 0.0 and 2.0 regardless of how well-written or fluent the text is.
+- Off-Topic / Evasive Responses: If the answer does not address the question asked (e.g., discussing hash maps or general syntax when asked about distributed systems, or discussing unrelated concepts), assign a maximum score between 0.0 and 2.0 regardless of how well-written or fluent the text is, and set classification to "Off-topic".
 - Scoring Scale (0.0 to 10.0):
   * 9.0 - 10.0: Outstanding / Senior-ready. Precise, comprehensive, technically rigorous, covers trade-offs.
   * 7.5 - 8.9: Strong. Accurate and relevant with minor omissions or slight lack of depth.
@@ -29,10 +41,17 @@ Strict Guardrails & Scoring Calibration:
 
 Required Output Structure (JSON Schema):
 - score: Overall score out of 10.0 (rounded to one decimal place)
+- classification: Exactly one of: "Correct", "Partially Correct", "Incorrect", "Off-topic"
 - relevance: Concise analysis evaluating direct relevance and adherence to prompt (1-3 sentences)
 - technical_accuracy: Evidence-based analysis evaluating technical correctness with specific references to candidate statements (1-3 sentences)
 - clarity: Concise analysis of structural clarity, communication tone, and vocabulary (1-3 sentences)
 - completeness: Concise analysis of depth, coverage of trade-offs, and missing concepts (1-3 sentences)
+- correct_concepts: 1 to 4 bullet points identifying factually or conceptually sound statements made by the candidate (or empty list if none)
+- incorrect_statements: Bullet points identifying specific flawed or false technical claims in the answer (or empty list if none)
+- mistake_explanations: Bullet points explaining WHY each corresponding mistake in incorrect_statements is incorrect (or empty list if none)
+- missing_concepts: 1 to 4 bullet points identifying critical technical concepts, trade-offs, or components omitted (or empty list if complete)
+- correct_explanation: Concise educational explanation clarifying the core question and correcting errors (1-3 paragraphs)
+- ideal_answer: A complete, interview-ready model answer demonstrating exemplary technical depth and structure
 - strengths: 2 to 4 concrete bullet points highlighting specific strengths demonstrated in the response
 - weaknesses: 1 to 4 concrete bullet points identifying specific technical gaps, inaccuracies, or omissions
 - suggestions: 2 to 4 actionable, high-impact suggestions for how the candidate can elevate this answer
